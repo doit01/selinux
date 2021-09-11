@@ -9,4 +9,12 @@ yum install policycoreutils-python
 rpm -ivh container-selinux-2.119.2-1.911c772.el7_8.noarch.rpm 
 
 
+（1）安装 Docker
+$ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+ yum list docker-ce --showduplicates | sort -r
+$ yum -y install docker-ce-18.06.1.ce-3.el7
+
+$ systemctl enable docker && systemctl start docker
+$ docker --version
+
 
