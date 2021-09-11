@@ -18,3 +18,46 @@ $ systemctl enable docker && systemctl start docker
 $ docker --version
 
 
+如果
+Could not resolve host: mirrors.cloud.aliyuncs.co
+解决方法：
+
+这是创建阿里云服务器之后/etc/yum.repos.d目录下默认的所有repo文件：
+
+# root @localhost in /etc/yum.repos.d [11:33:13] 
+$ ll
+total 40K
+-rw-r--r-- 1 root root  676 Jan 28 11:27 CentOS-Base.repo
+-rw-r--r-- 1 root root 1.3K Nov 23 21:16 CentOS-CR.repo
+-rw-r--r-- 1 root root  649 Nov 23 21:16 CentOS-Debuginfo.repo
+-rw-r--r-- 1 root root  314 Nov 23 21:16 CentOS-fasttrack.repo
+-rw-r--r-- 1 root root  630 Nov 23 21:16 CentOS-Media.repo
+-rw-r--r-- 1 root root 1.3K Nov 23 21:16 CentOS-Sources.repo
+-rw-r--r-- 1 root root 5.6K Nov 23 21:16 CentOS-Vault.repo
+-rw-r--r-- 1 root root  231 Jan 28 11:33 epel.repo
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+
+把/etc/yum.repos.d/目录下所有的repo文件移动到其他目录，例如/tmp/yum。然后下载Centos-7.repo。
+
+$ mv *.repo /tmp/yum
+$ wget http://mirrors.aliyun.com/repo/Centos-7.repo
+$ yum clean all
+$ yum makecache
+
+    1
+    2
+    3
+    4
+
+再次执行yum install
